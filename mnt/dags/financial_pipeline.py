@@ -8,14 +8,14 @@ from airflow.operators.python_operator import PythonOperator
 def get_financial_prices_today():
     import requests
     
-    # 🌟 ย้ายค่ายมาดึงข้อมูลผ่าน API ตรงๆ ปลอดภัย ไร้กังวลเรื่องโดนบล็อก
+    # ย้ายค่ายมาดึงข้อมูลผ่าน API ตรงๆ 
     url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether-gold,the-open-network&vs_currencies=usd,thb"
     
     results = []
     try:
         response = requests.get(url, timeout=10)
         data = response.json()
-        print(f"📡 API Response Data: {data}")
+        print(f" API Response Data: {data}")
         
         # ตรวจสอบว่ามีข้อมูลกลับมาจริงไหม
         if data:
@@ -57,12 +57,12 @@ def get_financial_prices_today():
                 "volume": 0,
                 "trade_date": trade_date
             })
-            print("✅ Successfully fetched data from CoinGecko API")
+            print(" Successfully fetched data from CoinGecko API")
         else:
-            print("❌ Error: Received empty data from API")
+            print(" Error: Received empty data from API")
             
     except Exception as e:
-        print(f"❌ Connection Error: {str(e)}")
+        print(f" Connection Error: {str(e)}")
         
     return results
 
@@ -73,7 +73,7 @@ def save_financial_data_to_db(**context):
     financial_data_list = ti.xcom_pull(task_ids='get_financial_prices_today')
     
     if not financial_data_list:
-        print("⚠️ No financial data received from XCom! Skipping database insertion.")
+        print(" No financial data received from XCom! Skipping database insertion.")
         return
 
     insert_query = """
