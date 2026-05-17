@@ -94,7 +94,7 @@ def save_financial_data_to_db(**context):
             asset['trade_date'],
             datetime.now()
         ))
-        print(f"💾 Inserted {asset['asset_name']} into database.")
+        print(f" Inserted {asset['asset_name']} into database.")
 
 default_args = {
     'owner': 'dataength',
