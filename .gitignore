@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+
+# Airflow
+logs/
+
+# Vim
+*.swp
+
+# Mac
+.DS_Store
